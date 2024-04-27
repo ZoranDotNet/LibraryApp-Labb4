@@ -1,0 +1,29 @@
+﻿
+
+<div>
+    <h2>Result from Search</h2>
+
+    <div>
+        <table class="table w-50">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Fullname</td>
+                        <td><a asp-action="Details" asp-route-Id="@item.Id" class="btn-sm btn-dark text-decoration-none">Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="mt-4">
+            <a asp-action="FindCustomer" class="btn btn-primary text-decoration-none">New Search</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary text-decoration-none">Home</a>
+        </div>
+    </div>
+</div>

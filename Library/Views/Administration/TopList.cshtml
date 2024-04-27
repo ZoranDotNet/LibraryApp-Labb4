@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Library.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Top-3 Borrowed Books</h1>
+
+
+<table class="table w-50 mx-auto">
+    <thead>
+        <tr class="table-primary">
+            <th>#</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>Borrowed</th>
+
+           @{ int index = 1;}
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                 
+                <td>@index</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BorrowedCount)
+                </td>
+
+               @{index++;
+               }
+            </tr>
+        }
+    </tbody>
+</table>
+

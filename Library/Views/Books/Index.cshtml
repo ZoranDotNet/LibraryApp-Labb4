@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Library.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Books</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-dark me-3"><i class="bi bi-plus-square"></i> Add Book</a>
+</p>
+<table class="table">
+    <thead class="table-primary">
+        <tr>
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+           
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th class="col-1">Available</th>
+            <th class="col-5"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @if (item.IsAvailable)
+                    {
+                        <span>✅</span>
+                    }
+                    else
+                    {
+                        <span>❌</span>
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-sm btn-success text-decoration-none"><i class="bi bi-pencil"></i> Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-sm btn-dark text-decoration-none"><i class="bi bi-search"></i> Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn-sm btn-danger text-decoration-none"><i class="bi bi-x-square"></i> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

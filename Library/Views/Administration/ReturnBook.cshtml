@@ -1,0 +1,37 @@
+﻿@model Borrow
+
+
+@{
+}
+
+
+<section class="p-3 bg-dark text-light text-center rounded w-50 mx-auto mt-5">
+    <h2>Return Book</h2>
+    <hr />
+    <div class="row">
+        <div class="">
+            <form asp-action="ReturnBook" method="post">
+                @if (ViewBag.Books == null || ViewBag.Books.Items.Count == 0)
+                {
+                    <p class="text-danger">This customer has not borrowed any books.</p>
+                }
+                else
+                {
+                    <div class="form-group mb-3">
+                        <label asp-for="BookId" class="control-label">Book</label>
+                        <select asp-for="BookId" class="form-control" asp-items="@ViewBag.Books"></select>
+                    </div>
+                    <p>Select Book to return for Customer: @ViewBag.Customer.Fullname</p>
+                    <div class="form-group mt-3 mb-2 d-flex justify-content-center align-items-center gap-3">
+                        <input type="submit" value="ReturnBook" asp-route-CustomerId="@ViewBag.Customer.Id" class="btn btn-primary col-3" />
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary col-3">Cancel</a>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

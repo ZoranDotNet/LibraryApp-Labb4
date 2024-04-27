@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Library.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="mb-3">All Customers</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-dark me-3"><i class="bi bi-plus-square"></i> Add Customer</a>
+    <a asp-controller="Administration" asp-action="FindCustomer" class="btn btn-dark"><i class="bi bi-search"></i> Search Customer</a>
+</p>
+<table class="table">
+    <thead class="table-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-sm btn-success text-decoration-none"><i class="bi bi-pencil"></i> Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn-sm btn-dark text-decoration-none"><i class="bi bi-search"></i> Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-sm btn-danger text-decoration-none"><i class="bi bi-x-square"></i> Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

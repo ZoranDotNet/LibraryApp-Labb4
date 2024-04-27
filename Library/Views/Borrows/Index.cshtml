@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Library.Models.Borrow>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Borrow History</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrowed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Returned)
+            </th>
+            <th>Returned</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model.OrderByDescending(b => b.Borrowed))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Fullname)
+                    </td>
+                    <td>
+                        @item.Borrowed.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.Returned.ToShortDateString()
+                    </td>
+                    <td>
+                        @if (item.IsReturned)
+                        {
+                            <span>✅</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger"> @(DateTime.Now > item.Returned ? (DateTime.Now - item.Returned).Days + " days overdue" : null)</span>
+                        }
+
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }else
+        {
+            <tr>
+                <td colspan="5" class="text-danger">No History found</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+﻿@model Customer
+
+<section class="p-3 bg-dark text-light text-center rounded w-50 mx-auto mt-5">
+    <h2>Search for Customer</h2>
+    <hr />
+    <form method="post" asp-action="FindCustomer">
+        <div class="d-flex justify-content-around mb-3">
+            <div class="form-group col-6 pe-2">
+                <label asp-for="Firstname"></label>
+                <input asp-for="Firstname" class="form-control" />
+            </div>
+            <div class="form-group col-6 ps-2">
+                <label asp-for="Lastname"></label>
+                <input asp-for="Lastname" class="form-control" />
+            </div>
+        </div>
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-primary form-control" >Search</button>
+            <a asp-controller="Customers" asp-action="Index" class="btn btn-secondary form-control">Back to List</a>
+        </div>
+    </form>
+
+</section>
